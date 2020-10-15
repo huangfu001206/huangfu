@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kejichu.contractapproval.dao.ContractProcessMapper">
+  <resultMap id="BaseResultMap" type="com.kejichu.contractapproval.entity.ContractProcess">
+    <id column="cont_id" jdbcType="VARCHAR" property="contId" />
+    <result column="cont_state" jdbcType="VARCHAR" property="contState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cont_id, cont_state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract_process
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from contract_process
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kejichu.contractapproval.entity.ContractProcess">
+    <selectKey keyProperty="contId" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into contract_process (cont_id, cont_state)
+    values (#{contId,jdbcType=VARCHAR}, #{contState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kejichu.contractapproval.entity.ContractProcess">
+    <selectKey keyProperty="contId" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into contract_process
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      cont_id,
+      <if test="contState != null">
+        cont_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{contId,jdbcType=VARCHAR},
+      <if test="contState != null">
+        #{contState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kejichu.contractapproval.entity.ContractProcess">
+    update contract_process
+    <set>
+      <if test="contState != null">
+        cont_state = #{contState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kejichu.contractapproval.entity.ContractProcess">
+    update contract_process
+    set cont_state = #{contState,jdbcType=VARCHAR}
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </update>
+</mapper>

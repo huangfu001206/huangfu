@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://10.152.6.141:3306/contract_approval?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 连接池类型
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+mybatis:
+  mapper-locations:
+    classpath*:generator/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    #配置别名
+  type-aliases-package: com.kejichu.contractapproval.entity
+
+token:
+  # 令牌自定义标识
+  header: Authorization
+  # 令牌秘钥
+  #  secret: abcdefghijklmnopqrstuvwxyz
+  secret: (EMOK:)_$^11244^%$_(IS:)_@@++--(COOL:)_++++_.sds_(GUY:)
+  # 令牌有效期
+  expireTime: 3600000

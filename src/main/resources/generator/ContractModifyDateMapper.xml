@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kejichu.contractapproval.dao.ContractModifyDateMapper">
+  <resultMap id="BaseResultMap" type="com.kejichu.contractapproval.entity.ContractModifyDate">
+    <id column="cont_modify_date_id" jdbcType="INTEGER" property="contModifyDateId" />
+    <result column="cont_id" jdbcType="VARCHAR" property="contId" />
+    <result column="cont_modify_data" jdbcType="DATE" property="contModifyData" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cont_modify_date_id, cont_id, cont_modify_data
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract_modify_date
+    where cont_modify_date_id = #{contModifyDateId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contract_modify_date
+    where cont_modify_date_id = #{contModifyDateId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kejichu.contractapproval.entity.ContractModifyDate">
+    <selectKey keyProperty="contModifyDateId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into contract_modify_date (cont_id, cont_modify_data)
+    values (#{contId,jdbcType=VARCHAR}, #{contModifyData,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kejichu.contractapproval.entity.ContractModifyDate">
+    <selectKey keyProperty="contModifyDateId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into contract_modify_date
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        cont_id,
+      </if>
+      <if test="contModifyData != null">
+        cont_modify_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="contModifyData != null">
+        #{contModifyData,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kejichu.contractapproval.entity.ContractModifyDate">
+    update contract_modify_date
+    <set>
+      <if test="contId != null">
+        cont_id = #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="contModifyData != null">
+        cont_modify_data = #{contModifyData,jdbcType=DATE},
+      </if>
+    </set>
+    where cont_modify_date_id = #{contModifyDateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kejichu.contractapproval.entity.ContractModifyDate">
+    update contract_modify_date
+    set cont_id = #{contId,jdbcType=VARCHAR},
+      cont_modify_data = #{contModifyData,jdbcType=DATE}
+    where cont_modify_date_id = #{contModifyDateId,jdbcType=INTEGER}
+  </update>
+</mapper>

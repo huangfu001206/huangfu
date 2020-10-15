@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kejichu.contractapproval.dao.ComplaintMapper">
+  <resultMap id="BaseResultMap" type="com.kejichu.contractapproval.entity.Complaint">
+    <id column="cont_id" jdbcType="VARCHAR" property="contId" />
+    <id column="sno" jdbcType="VARCHAR" property="sno" />
+    <id column="advi_time" jdbcType="TIMESTAMP" property="adviTime" />
+    <result column="advi_content" jdbcType="VARCHAR" property="adviContent" />
+    <result column="advi_state" jdbcType="VARCHAR" property="adviState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cont_id, sno, advi_time, advi_content, advi_state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.kejichu.contractapproval.entity.ComplaintKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from complaint
+    where cont_id = #{contId,jdbcType=VARCHAR}
+      and sno = #{sno,jdbcType=VARCHAR}
+      and advi_time = #{adviTime,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.kejichu.contractapproval.entity.ComplaintKey">
+    delete from complaint
+    where cont_id = #{contId,jdbcType=VARCHAR}
+      and sno = #{sno,jdbcType=VARCHAR}
+      and advi_time = #{adviTime,jdbcType=TIMESTAMP}
+  </delete>
+  <insert id="insert" parameterType="com.kejichu.contractapproval.entity.Complaint">
+    insert into complaint (cont_id, sno, advi_time, 
+      advi_content, advi_state)
+    values (#{contId,jdbcType=VARCHAR}, #{sno,jdbcType=VARCHAR}, #{adviTime,jdbcType=TIMESTAMP}, 
+      #{adviContent,jdbcType=VARCHAR}, #{adviState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kejichu.contractapproval.entity.Complaint">
+    insert into complaint
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        cont_id,
+      </if>
+      <if test="sno != null">
+        sno,
+      </if>
+      <if test="adviTime != null">
+        advi_time,
+      </if>
+      <if test="adviContent != null">
+        advi_content,
+      </if>
+      <if test="adviState != null">
+        advi_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="sno != null">
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="adviTime != null">
+        #{adviTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adviContent != null">
+        #{adviContent,jdbcType=VARCHAR},
+      </if>
+      <if test="adviState != null">
+        #{adviState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kejichu.contractapproval.entity.Complaint">
+    update complaint
+    <set>
+      <if test="adviContent != null">
+        advi_content = #{adviContent,jdbcType=VARCHAR},
+      </if>
+      <if test="adviState != null">
+        advi_state = #{adviState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cont_id = #{contId,jdbcType=VARCHAR}
+      and sno = #{sno,jdbcType=VARCHAR}
+      and advi_time = #{adviTime,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kejichu.contractapproval.entity.Complaint">
+    update complaint
+    set advi_content = #{adviContent,jdbcType=VARCHAR},
+      advi_state = #{adviState,jdbcType=VARCHAR}
+    where cont_id = #{contId,jdbcType=VARCHAR}
+      and sno = #{sno,jdbcType=VARCHAR}
+      and advi_time = #{adviTime,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

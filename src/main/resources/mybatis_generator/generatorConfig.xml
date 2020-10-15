@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 配置生成器 -->
+<generatorConfiguration>
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/contract_approval"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用BigDecimals，false可自动转化以下类型(Long Integer Short等) -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成模型的包名和位置-->
+        <javaModelGenerator targetPackage="com.kejichu.contractapproval.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="generator" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.kejichu.contractapproval.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <table tableName="complaint" domainObjectName="Complaint" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <!--useActualColumnNames用于指定生成实体类时是否使用实际的列名作为实体类的属性名-->
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+
+        <!--contract_info表-->
+        <table tableName="contract_info" domainObjectName="ContractInfo" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <property name="useActualColumnNames" value="false"/>
+        <generatedKey column="sno" sqlStatement="Mysql" identity="false"/>
+        </table>
+
+        <!--contract_modify_date表-->
+        <table tableName="contract_modify_date" domainObjectName="ContractModifyDate" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="cont_modify_date_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <!--contract_pass表-->
+        <table tableName="contract_pass" domainObjectName="ContractPass" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="contract_pass_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <!--contract_process表-->
+        <table tableName="contract_process" domainObjectName="ContractProcess" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="cont_id" sqlStatement="Mysql" identity="false"/>
+        </table>
+
+        <!--fa_audit表-->
+        <table tableName="fa_audit" domainObjectName="FaAudit" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <!--fu_audit表-->
+        <table tableName="fu_audit" domainObjectName="FuAudit" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <!--ke_audit表-->
+        <table tableName="ke_audit" domainObjectName="KeAudit" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <!--set_money表-->
+        <table tableName="set_money" domainObjectName="SetMoney" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <!--tech_back_advice表-->
+        <table tableName="tech_back_advice" domainObjectName="TechBackAdvice" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="tech_advi_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <!--user_state表-->
+        <table tableName="user_state" domainObjectName="UserState" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="state_id" sqlStatement="Mysql" identity="false"/>
+        </table>
+
+        <!--xiao_audit表-->
+        <table tableName="xiao_audit" domainObjectName="XiaoAudit" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <!--xiao_audit表-->
+        <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+            <generatedKey column="sno" sqlStatement="Mysql" identity="false"/>
+        </table>
+    </context>
+
+</generatorConfiguration>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kejichu.contractapproval.dao.SetMoneyMapper">
+  <resultMap id="BaseResultMap" type="com.kejichu.contractapproval.entity.SetMoney">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fa_set_money" jdbcType="DOUBLE" property="faSetMoney" />
+    <result column="ke_set_money" jdbcType="DOUBLE" property="keSetMoney" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fa_set_money, ke_set_money
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from set_money
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from set_money
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kejichu.contractapproval.entity.SetMoney">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into set_money (fa_set_money, ke_set_money)
+    values (#{faSetMoney,jdbcType=DOUBLE}, #{keSetMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kejichu.contractapproval.entity.SetMoney">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into set_money
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="faSetMoney != null">
+        fa_set_money,
+      </if>
+      <if test="keSetMoney != null">
+        ke_set_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="faSetMoney != null">
+        #{faSetMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="keSetMoney != null">
+        #{keSetMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kejichu.contractapproval.entity.SetMoney">
+    update set_money
+    <set>
+      <if test="faSetMoney != null">
+        fa_set_money = #{faSetMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="keSetMoney != null">
+        ke_set_money = #{keSetMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kejichu.contractapproval.entity.SetMoney">
+    update set_money
+    set fa_set_money = #{faSetMoney,jdbcType=DOUBLE},
+      ke_set_money = #{keSetMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

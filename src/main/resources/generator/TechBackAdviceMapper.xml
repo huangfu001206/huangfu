@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kejichu.contractapproval.dao.TechBackAdviceMapper">
+  <resultMap id="BaseResultMap" type="com.kejichu.contractapproval.entity.TechBackAdvice">
+    <id column="tech_advi_id" jdbcType="INTEGER" property="techAdviId" />
+    <result column="cont_id" jdbcType="VARCHAR" property="contId" />
+    <result column="sno" jdbcType="VARCHAR" property="sno" />
+    <result column="whet_advice" jdbcType="VARCHAR" property="whetAdvice" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="back_advi_time" jdbcType="TIMESTAMP" property="backAdviTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tech_advi_id, cont_id, sno, whet_advice, reason, back_advi_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tech_back_advice
+    where tech_advi_id = #{techAdviId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tech_back_advice
+    where tech_advi_id = #{techAdviId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kejichu.contractapproval.entity.TechBackAdvice">
+    <selectKey keyProperty="techAdviId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tech_back_advice (cont_id, sno, whet_advice, 
+      reason, back_advi_time)
+    values (#{contId,jdbcType=VARCHAR}, #{sno,jdbcType=VARCHAR}, #{whetAdvice,jdbcType=VARCHAR}, 
+      #{reason,jdbcType=VARCHAR}, #{backAdviTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kejichu.contractapproval.entity.TechBackAdvice">
+    <selectKey keyProperty="techAdviId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tech_back_advice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        cont_id,
+      </if>
+      <if test="sno != null">
+        sno,
+      </if>
+      <if test="whetAdvice != null">
+        whet_advice,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="backAdviTime != null">
+        back_advi_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="sno != null">
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="whetAdvice != null">
+        #{whetAdvice,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="backAdviTime != null">
+        #{backAdviTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kejichu.contractapproval.entity.TechBackAdvice">
+    update tech_back_advice
+    <set>
+      <if test="contId != null">
+        cont_id = #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="sno != null">
+        sno = #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="whetAdvice != null">
+        whet_advice = #{whetAdvice,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="backAdviTime != null">
+        back_advi_time = #{backAdviTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tech_advi_id = #{techAdviId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kejichu.contractapproval.entity.TechBackAdvice">
+    update tech_back_advice
+    set cont_id = #{contId,jdbcType=VARCHAR},
+      sno = #{sno,jdbcType=VARCHAR},
+      whet_advice = #{whetAdvice,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      back_advi_time = #{backAdviTime,jdbcType=TIMESTAMP}
+    where tech_advi_id = #{techAdviId,jdbcType=INTEGER}
+  </update>
+</mapper>

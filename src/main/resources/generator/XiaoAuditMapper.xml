@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kejichu.contractapproval.dao.XiaoAuditMapper">
+  <resultMap id="BaseResultMap" type="com.kejichu.contractapproval.entity.XiaoAudit">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cont_id" jdbcType="VARCHAR" property="contId" />
+    <result column="sno" jdbcType="VARCHAR" property="sno" />
+    <result column="xiao_audit_time" jdbcType="TIMESTAMP" property="xiaoAuditTime" />
+    <result column="agree" jdbcType="VARCHAR" property="agree" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cont_id, sno, xiao_audit_time, agree
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xiao_audit
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xiao_audit
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kejichu.contractapproval.entity.XiaoAudit">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into xiao_audit (cont_id, sno, xiao_audit_time, 
+      agree)
+    values (#{contId,jdbcType=VARCHAR}, #{sno,jdbcType=VARCHAR}, #{xiaoAuditTime,jdbcType=TIMESTAMP}, 
+      #{agree,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kejichu.contractapproval.entity.XiaoAudit">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into xiao_audit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        cont_id,
+      </if>
+      <if test="sno != null">
+        sno,
+      </if>
+      <if test="xiaoAuditTime != null">
+        xiao_audit_time,
+      </if>
+      <if test="agree != null">
+        agree,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="sno != null">
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaoAuditTime != null">
+        #{xiaoAuditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agree != null">
+        #{agree,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kejichu.contractapproval.entity.XiaoAudit">
+    update xiao_audit
+    <set>
+      <if test="contId != null">
+        cont_id = #{contId,jdbcType=VARCHAR},
+      </if>
+      <if test="sno != null">
+        sno = #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaoAuditTime != null">
+        xiao_audit_time = #{xiaoAuditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agree != null">
+        agree = #{agree,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kejichu.contractapproval.entity.XiaoAudit">
+    update xiao_audit
+    set cont_id = #{contId,jdbcType=VARCHAR},
+      sno = #{sno,jdbcType=VARCHAR},
+      xiao_audit_time = #{xiaoAuditTime,jdbcType=TIMESTAMP},
+      agree = #{agree,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

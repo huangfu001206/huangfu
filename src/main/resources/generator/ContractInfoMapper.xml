@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kejichu.contractapproval.dao.ContractInfoMapper">
+  <resultMap id="BaseResultMap" type="com.kejichu.contractapproval.entity.ContractInfo">
+    <id column="cont_id" jdbcType="VARCHAR" property="contId" />
+    <result column="sno" jdbcType="VARCHAR" property="sno" />
+    <result column="cont_unit" jdbcType="VARCHAR" property="contUnit" />
+    <result column="cont_leader" jdbcType="VARCHAR" property="contLeader" />
+    <result column="cont_name" jdbcType="VARCHAR" property="contName" />
+    <result column="cont_partner" jdbcType="VARCHAR" property="contPartner" />
+    <result column="cont_catagory" jdbcType="VARCHAR" property="contCatagory" />
+    <result column="cont_money" jdbcType="DOUBLE" property="contMoney" />
+    <result column="cont_path" jdbcType="VARCHAR" property="contPath" />
+    <result column="cont_commit" jdbcType="TIMESTAMP" property="contCommit" />
+    <result column="cont_state" jdbcType="VARCHAR" property="contState" />
+    <result column="cont_oldname" jdbcType="VARCHAR" property="contOldname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cont_id, sno, cont_unit, cont_leader, cont_name, cont_partner, cont_catagory, cont_money, 
+    cont_path, cont_commit, cont_state, cont_oldname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contract_info
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from contract_info
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kejichu.contractapproval.entity.ContractInfo">
+    <selectKey keyProperty="sno" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into contract_info (cont_id, sno, cont_unit, 
+      cont_leader, cont_name, cont_partner, 
+      cont_catagory, cont_money, cont_path, 
+      cont_commit, cont_state, cont_oldname
+      )
+    values (#{contId,jdbcType=VARCHAR}, #{sno,jdbcType=VARCHAR}, #{contUnit,jdbcType=VARCHAR}, 
+      #{contLeader,jdbcType=VARCHAR}, #{contName,jdbcType=VARCHAR}, #{contPartner,jdbcType=VARCHAR}, 
+      #{contCatagory,jdbcType=VARCHAR}, #{contMoney,jdbcType=DOUBLE}, #{contPath,jdbcType=VARCHAR}, 
+      #{contCommit,jdbcType=TIMESTAMP}, #{contState,jdbcType=VARCHAR}, #{contOldname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kejichu.contractapproval.entity.ContractInfo">
+    <selectKey keyProperty="sno" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into contract_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        cont_id,
+      </if>
+      sno,
+      <if test="contUnit != null">
+        cont_unit,
+      </if>
+      <if test="contLeader != null">
+        cont_leader,
+      </if>
+      <if test="contName != null">
+        cont_name,
+      </if>
+      <if test="contPartner != null">
+        cont_partner,
+      </if>
+      <if test="contCatagory != null">
+        cont_catagory,
+      </if>
+      <if test="contMoney != null">
+        cont_money,
+      </if>
+      <if test="contPath != null">
+        cont_path,
+      </if>
+      <if test="contCommit != null">
+        cont_commit,
+      </if>
+      <if test="contState != null">
+        cont_state,
+      </if>
+      <if test="contOldname != null">
+        cont_oldname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contId != null">
+        #{contId,jdbcType=VARCHAR},
+      </if>
+      #{sno,jdbcType=VARCHAR},
+      <if test="contUnit != null">
+        #{contUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="contLeader != null">
+        #{contLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="contName != null">
+        #{contName,jdbcType=VARCHAR},
+      </if>
+      <if test="contPartner != null">
+        #{contPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="contCatagory != null">
+        #{contCatagory,jdbcType=VARCHAR},
+      </if>
+      <if test="contMoney != null">
+        #{contMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="contPath != null">
+        #{contPath,jdbcType=VARCHAR},
+      </if>
+      <if test="contCommit != null">
+        #{contCommit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contState != null">
+        #{contState,jdbcType=VARCHAR},
+      </if>
+      <if test="contOldname != null">
+        #{contOldname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kejichu.contractapproval.entity.ContractInfo">
+    update contract_info
+    <set>
+      <if test="sno != null">
+        sno = #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="contUnit != null">
+        cont_unit = #{contUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="contLeader != null">
+        cont_leader = #{contLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="contName != null">
+        cont_name = #{contName,jdbcType=VARCHAR},
+      </if>
+      <if test="contPartner != null">
+        cont_partner = #{contPartner,jdbcType=VARCHAR},
+      </if>
+      <if test="contCatagory != null">
+        cont_catagory = #{contCatagory,jdbcType=VARCHAR},
+      </if>
+      <if test="contMoney != null">
+        cont_money = #{contMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="contPath != null">
+        cont_path = #{contPath,jdbcType=VARCHAR},
+      </if>
+      <if test="contCommit != null">
+        cont_commit = #{contCommit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contState != null">
+        cont_state = #{contState,jdbcType=VARCHAR},
+      </if>
+      <if test="contOldname != null">
+        cont_oldname = #{contOldname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kejichu.contractapproval.entity.ContractInfo">
+    update contract_info
+    set sno = #{sno,jdbcType=VARCHAR},
+      cont_unit = #{contUnit,jdbcType=VARCHAR},
+      cont_leader = #{contLeader,jdbcType=VARCHAR},
+      cont_name = #{contName,jdbcType=VARCHAR},
+      cont_partner = #{contPartner,jdbcType=VARCHAR},
+      cont_catagory = #{contCatagory,jdbcType=VARCHAR},
+      cont_money = #{contMoney,jdbcType=DOUBLE},
+      cont_path = #{contPath,jdbcType=VARCHAR},
+      cont_commit = #{contCommit,jdbcType=TIMESTAMP},
+      cont_state = #{contState,jdbcType=VARCHAR},
+      cont_oldname = #{contOldname,jdbcType=VARCHAR}
+    where cont_id = #{contId,jdbcType=VARCHAR}
+  </update>
+</mapper>
